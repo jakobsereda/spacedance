@@ -62,4 +62,3 @@ def display_webcam():
 
 if __name__ == "__main__":
     display_webcam()
-

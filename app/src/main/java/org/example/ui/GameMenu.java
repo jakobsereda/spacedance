@@ -11,6 +11,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 public class GameMenu extends JPanel implements ActionListener {
     private MainFrame parent;
     private ImageIcon backgroundImage;
@@ -23,6 +26,8 @@ public class GameMenu extends JPanel implements ActionListener {
     private int countdown;
     private int initCountdown;
     private Position currentPosition;
+
+    private double pyOut;
 
     public GameMenu(Difficulty difficulty, MainFrame parent) throws Exception {
         this.parent = parent;
@@ -102,11 +107,42 @@ public class GameMenu extends JPanel implements ActionListener {
 
     private void updateCountdown() {
         countdown--;
+        if (countdown == 7) {
+            runPythonScript(); 
+        }
         if (countdown <= 0) {
             countdown = initCountdown;
             switchImage();
         }
         displayTimer();
+    }
+
+    private void runPythonScript() {
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder("python3", "path/to/your/script.py");
+            processBuilder.redirectErrorStream(true);
+    
+            Process process = processBuilder.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                try {
+                    pyOut = Double.parseDouble(line);
+                } catch (NumberFormatException e) {
+                    System.err.println("Could not parse output: " + line);
+                }
+            }
+    
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                System.err.println("Python script exited with error code: " + exitCode);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        }
     }
 
     private void switchImage() {
