@@ -27,7 +27,7 @@ public class GameMenu extends JPanel implements ActionListener {
     public GameMenu(Difficulty difficulty, MainFrame parent) throws Exception {
         this.parent = parent;
         setLayout(new BorderLayout(0, 70));
-        backgroundImage = new ImageIcon("app/src/main/resources/images/bgimages/spacebackground.jpg");
+        backgroundImage = new ImageIcon("app/src/main/resources/images/bgimages/marsbackground.jpg");
         game = new Game(difficulty, 5);
         switch (difficulty) {
             case Difficulty.Easy:
@@ -46,9 +46,6 @@ public class GameMenu extends JPanel implements ActionListener {
         JPanel positionPanel = initPositionPanel();
         add(positionPanel, BorderLayout.CENTER);
         
-        setSize(960, 960);
-        repaint();
-        
         initButtons();
         
         currentPosition = game.eatPosition();
@@ -56,6 +53,9 @@ public class GameMenu extends JPanel implements ActionListener {
 
         countdown = initCountdown;
         setupTimers();
+
+        setSize(960, 960);
+        repaint();
     }
 
     // Initialize buttons (e.g., quit button)
@@ -72,6 +72,7 @@ public class GameMenu extends JPanel implements ActionListener {
         imageLabel = new JLabel();
         timerLabel = new JLabel("30", SwingConstants.CENTER);
         timerLabel.setFont(new Font("SansSerif", Font.BOLD, 36));
+        timerLabel.setForeground(Color.WHITE);
 
         panel.add(imageLabel, BorderLayout.CENTER);
         panel.add(timerLabel, BorderLayout.SOUTH);
