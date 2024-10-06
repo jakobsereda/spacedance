@@ -1,7 +1,6 @@
 package org.example.ui;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import java.awt.*;
@@ -10,29 +9,69 @@ import java.awt.event.ActionListener;
 
 public class MainMenu extends JPanel implements ActionListener {
     private MainFrame parent;
+    private ImageIcon backgroundImage;
     private JButton quitButton;
     private JButton easyButton;
     private JButton mediButton;
     private JButton hardButton;
 
     public MainMenu(MainFrame parent) {
-        
+        this.parent = parent;
+        setLayout(new BorderLayout(0, 70));
+        backgroundImage = new ImageIcon("app/src/main/resources/images/bgimages/spacebackground.jpg");
+
+        JPanel buttonPanel = initButtons();
+
+        JPanel spacing = new JPanel();
+        spacing.setOpaque(false);
+
+        setSize(960, 540);
+        add(spacing, BorderLayout.NORTH);
+        add(buttonPanel, BorderLayout.CENTER);
+        repaint();
     }
 
-    public void initButtons() {
-        Color buttonColor = new Color(0, 0, 0);
+    private JPanel initButtons() {
+        Color buttonColor = new Color(200, 40, 10); // change this pleaseeeee
 
         quitButton = new JButton(" Quit ");
-        initButton(quitButton, buttonColor, 300, 80, 20);
+        initButton(quitButton, buttonColor, 200, 80, 15);
 
         easyButton = new JButton(" Start Easy Game ");
-        initButton(easyButton, buttonColor, 300, 80, 20);
+        initButton(easyButton, buttonColor, 200, 80, 15);
 
         mediButton = new JButton(" Start Medium Game ");
-        initButton(mediButton, buttonColor, 300, 80, 20);
+        initButton(mediButton, buttonColor, 200, 80, 15);
 
         hardButton = new JButton(" Start Hard Game ");
-        initButton(hardButton, buttonColor, 300, 80, 20);
+        initButton(hardButton, buttonColor, 200, 80, 15);
+
+        return initButtonPanel();
+    }
+
+    private JPanel initButtonPanel() {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+        buttonPanel.setOpaque(false);
+
+        JPanel firstButtonRow = new JPanel();
+        firstButtonRow.setOpaque(false);
+
+        JPanel secondButtonRow = new JPanel();
+        secondButtonRow.setOpaque(false);
+
+        FlowLayout buttonManager = new FlowLayout();
+        buttonManager.setHgap(40);
+
+        firstButtonRow.setLayout(buttonManager);
+        secondButtonRow.setLayout(buttonManager);
+        firstButtonRow.add(easyButton);
+        firstButtonRow.add(mediButton);
+        firstButtonRow.add(hardButton);
+        secondButtonRow.add(quitButton);
+        buttonPanel.add(firstButtonRow);
+        buttonPanel.add(secondButtonRow);
+        return buttonPanel;
     }
 
     /**
@@ -40,13 +79,20 @@ public class MainMenu extends JPanel implements ActionListener {
      * 
      * @param button 
      */
-    public void initButton(JButton button, Color buttonColor, int width, int height, int fontSize) {
+    private void initButton(JButton button, Color buttonColor, int width, int height, int fontSize) {
         button.setPreferredSize(new Dimension(width, height));
         button.setBackground(buttonColor);
         button.setForeground(Color.WHITE);
         button.setBorder(new LineBorder(Color.WHITE));
         button.setFont(new Font("SansSerif", Font.BOLD, fontSize));
         button.addActionListener(this);
+    }
+
+    @Override
+    public void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+        Dimension d = getSize();
+        graphics.drawImage(backgroundImage.getImage(), 0, 0, d.width, d.height, this);
     }
 
     @Override

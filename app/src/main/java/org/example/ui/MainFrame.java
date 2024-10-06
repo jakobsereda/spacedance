@@ -3,6 +3,8 @@ package org.example.ui;
 import java.awt.BorderLayout;
 import javax.swing.*;
 
+import org.example.model.Difficulty;
+
 public class MainFrame extends JFrame {
     public MainFrame() {
         setTitle("sample");
@@ -26,14 +28,17 @@ public class MainFrame extends JFrame {
     }
 
     public void easyGame() {
-
+        GameMenu game = new GameMenu(Difficulty.Easy);
+        setContentPane(game);
     }
 
     public void mediGame() {
-
+        GameMenu game = new GameMenu(Difficulty.Medium);
+        setContentPane(game);
     }
 
     public void hardGame() {
-
+        GameMenu game = new GameMenu(Difficulty.Hard);
+        setContentPane(game);
     }
 }
