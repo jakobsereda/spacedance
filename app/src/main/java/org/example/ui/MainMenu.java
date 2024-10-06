@@ -25,7 +25,7 @@ public class MainMenu extends JPanel implements ActionListener {
         JPanel spacing = new JPanel();
         spacing.setOpaque(false);
 
-        setSize(960, 540);
+        setSize(960, 960);
         add(spacing, BorderLayout.NORTH);
         add(buttonPanel, BorderLayout.CENTER);
         repaint();

@@ -8,7 +8,7 @@ import org.example.model.Difficulty;
 public class MainFrame extends JFrame {
     public MainFrame() {
         setTitle("sample");
-        setSize(960, 540); 
+        setSize(960, 960); 
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setResizable(false);
@@ -28,17 +28,29 @@ public class MainFrame extends JFrame {
     }
 
     public void easyGame() {
-        GameMenu game = new GameMenu(Difficulty.Easy);
-        setContentPane(game);
+        try {
+            GameMenu game = new GameMenu(Difficulty.Easy, this);
+            setContentPane(game);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void mediGame() {
-        GameMenu game = new GameMenu(Difficulty.Medium);
-        setContentPane(game);
+        try {
+            GameMenu game = new GameMenu(Difficulty.Medium, this);
+            setContentPane(game);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void hardGame() {
-        GameMenu game = new GameMenu(Difficulty.Hard);
-        setContentPane(game);
+        try {
+            GameMenu game = new GameMenu(Difficulty.Hard, this);
+            setContentPane(game);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
