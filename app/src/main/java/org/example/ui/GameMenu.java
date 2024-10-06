@@ -1,11 +1,11 @@
 package org.example.ui;
-import org.example.Timer;
-
-import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 import org.example.model.Difficulty;
 import org.example.model.Game;
+import org.example.model.Position;
+
+import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,36 +13,118 @@ import java.awt.event.ActionListener;
 
 public class GameMenu extends JPanel implements ActionListener {
     private MainFrame parent;
+    private ImageIcon backgroundImage;
     private JButton quitButton;
     private Game game;
-    private Timer time;
+    private Timer imageSwitchTimer;
+    private Timer countdownTimer;
+    private JLabel imageLabel;
+    private JLabel timerLabel;
+    private int countdown;
+    private int initCountdown;
+    private Position currentPosition;
 
-    public GameMenu(Difficulty difficulty) {
+    public GameMenu(Difficulty difficulty, MainFrame parent) throws Exception {
+        this.parent = parent;
+        setLayout(new BorderLayout(0, 70));
+        backgroundImage = new ImageIcon("app/src/main/resources/images/bgimages/spacebackground.jpg");
         game = new Game(difficulty, 5);
-        time = new Timer();
+        switch (difficulty) {
+            case Difficulty.Easy:
+                initCountdown = 30;
+                break;
+            case Difficulty.Medium:
+                initCountdown = 15;
+                break;
+            case Difficulty.Hard:
+                initCountdown = 7;
+                break;
+            default:
+                throw new IllegalArgumentException("Unexpected difficulty");
+        }
+
+        JPanel positionPanel = initPositionPanel();
+        add(positionPanel, BorderLayout.CENTER);
+        
+        setSize(960, 960);
+        repaint();
+        
+        initButtons();
+        
+        currentPosition = game.eatPosition();
+        displayImage(currentPosition);
+
+        countdown = initCountdown;
+        setupTimers();
     }
 
+    // Initialize buttons (e.g., quit button)
     public void initButtons() {
-        Color buttonColor = new Color(White);
+        Color buttonColor = new Color(200, 40, 10);
         quitButton = new JButton(" Quit ");
         initButton(quitButton, buttonColor, 300, 80, 20);
+        add(quitButton, BorderLayout.SOUTH);
     }
 
-    //TODO method to display image
-    public void displayImage(){
+    public JPanel initPositionPanel() {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setOpaque(false);
+        imageLabel = new JLabel();
+        timerLabel = new JLabel("30", SwingConstants.CENTER);
+        timerLabel.setFont(new Font("SansSerif", Font.BOLD, 36));
 
+        panel.add(imageLabel, BorderLayout.CENTER);
+        panel.add(timerLabel, BorderLayout.SOUTH);
+
+        return panel;
     }
-    
-    //TODO display timer
-    public void displayTimer(){
 
+    // Display the image for the current position
+    public void displayImage(Position position) {
+        if (position != null) {
+            ImageIcon imageIcon = new ImageIcon(position.getFilePath());
+            imageLabel.setIcon(imageIcon);
+        }
+    }
+
+    private void setupTimers() {
+        imageSwitchTimer = new Timer(initCountdown * 1000, e -> switchImage());
+
+        countdownTimer = new Timer(1000, e -> updateCountdown());
+
+        imageSwitchTimer.start();
+        countdownTimer.start();
+    }
+
+    public void displayTimer() {
+        timerLabel.setText(String.valueOf(countdown));
+    }
+
+    private void updateCountdown() {
+        countdown--;
+        if (countdown <= 0) {
+            countdown = initCountdown;
+            switchImage();
+        }
+        displayTimer();
+    }
+
+    private void switchImage() {
+        currentPosition = game.eatPosition();
+        if (currentPosition != null) {
+            displayImage(currentPosition);
+        } else {
+            imageSwitchTimer.stop();
+            countdownTimer.stop();
+            parent.startGame();
+        }
     }
 
     /**
      * Initializes a JButton to given specs
      * 
      * @param button 
-     */
+    */
     private void initButton(JButton button, Color buttonColor, int width, int height, int fontSize) {
         button.setPreferredSize(new Dimension(width, height));
         button.setBackground(buttonColor);
@@ -51,10 +133,18 @@ public class GameMenu extends JPanel implements ActionListener {
         button.setFont(new Font("SansSerif", Font.BOLD, fontSize));
         button.addActionListener(this);
     }
-    
-    //TODO quit game
+
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+        Dimension d = getSize();
+        graphics.drawImage(backgroundImage.getImage(), 0, 0, d.width, d.height, this);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == quitButton) {
+            parent.quitGame();  // Quit game when quit button is clicked
+        }
+    }
 }
