@@ -9,13 +9,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenu extends JPanel implements ActionListener {
+    private MainFrame parent;
     private JButton quitButton;
     private JButton easyButton;
     private JButton mediButton;
     private JButton hardButton;
 
-    public MainMenu() {
+    public MainMenu(MainFrame parent) {
+        
+    }
 
+    public void initButtons() {
+        Color buttonColor = new Color(0, 0, 0);
+
+        quitButton = new JButton(" Quit ");
+        initButton(quitButton, buttonColor, 300, 80, 20);
+
+        easyButton = new JButton(" Start Easy Game ");
+        initButton(easyButton, buttonColor, 300, 80, 20);
+
+        mediButton = new JButton(" Start Medium Game ");
+        initButton(mediButton, buttonColor, 300, 80, 20);
+
+        hardButton = new JButton(" Start Hard Game ");
+        initButton(hardButton, buttonColor, 300, 80, 20);
     }
 
     /**
@@ -35,13 +52,13 @@ public class MainMenu extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(quitButton)) {
-            // do something...
+            parent.quitGame();
         } else if (e.getSource().equals(easyButton)) {
-            // do something else...
+            parent.easyGame();
         } else if (e.getSource().equals(mediButton)) {
-            // do semething again...
+            parent.mediGame();
         } else if (e.getSource().equals(hardButton)) {
-            // ...
+            parent.hardGame();
         } 
     }
 }
