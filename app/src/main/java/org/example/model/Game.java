@@ -20,7 +20,8 @@ public class Game {
     }
 
     public Position eatPosition() {
-        return positions.remove();
+        if (positions.size() > 0) return positions.remove();
+        return null;
     }
 
     private int increaseScore(){
