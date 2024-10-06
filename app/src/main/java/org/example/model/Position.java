@@ -47,6 +47,9 @@ public class Position {
     /**
      * Sets the id of this position based
      * on its filepath
+     * 
+     * @exception Exception thrown if filepath has 
+     *                      an invalid format
      */
     private void setID() throws Exception {
         Pattern pattern = Pattern.compile("images/(\\d+)\\.jpg");
@@ -65,6 +68,8 @@ public class Position {
      * 
      * @param imageNum the number extracted from 
      *                 filepath or randomly generated
+     * @exception Exception thrown if imageNum is not
+     *                      associated with a known ID
      */
     private void setID(int imageNum) throws Exception {
         switch (imageNum) {
