@@ -16,8 +16,8 @@ public class GameMenu extends JPanel implements ActionListener {
     private Game game;
     private Timer time;
 
-    public GameMenu(Difficulty difficulty, int numPositions) {
-        game = new Game(difficulty,numPositions);
+    public GameMenu(Difficulty difficulty) {
+        game = new Game(difficulty, numPositions);
         time = new Timer();
     }
 
@@ -36,7 +36,6 @@ public class GameMenu extends JPanel implements ActionListener {
 
     }
     //TODO quit game
-
     @Override
     public void actionPerformed(ActionEvent e) {
     }
