@@ -7,6 +7,7 @@ import org.example.model.Difficulty;
 import org.example.model.Game;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameMenu extends JPanel implements ActionListener {
@@ -21,7 +22,7 @@ public class GameMenu extends JPanel implements ActionListener {
     }
 
     public void initButtons() {
-        Color buttonColor = new Color(White)
+        Color buttonColor = new Color(White);
         quitButton = new JButton(" Quit ");
         initButton(quitButton, buttonColor, 300, 80, 20);
     }
@@ -35,4 +36,9 @@ public class GameMenu extends JPanel implements ActionListener {
 
     }
     //TODO quit game
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+    }
+
 }
