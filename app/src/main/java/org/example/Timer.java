@@ -11,12 +11,11 @@ public class Timer {
         return System.currentTimeMillis() / 1000;
     }
 
-    public void start(){
+    public void start() {
         this.time += getTime();
     }
 
-    public void stop(){
+    public void stop() {
         this.time = getTime() - this.time;
     }
-
 }

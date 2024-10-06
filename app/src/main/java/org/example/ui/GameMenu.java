@@ -2,6 +2,7 @@ package org.example.ui;
 import org.example.Timer;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 import org.example.model.Difficulty;
 import org.example.model.Game;
@@ -17,7 +18,7 @@ public class GameMenu extends JPanel implements ActionListener {
     private Timer time;
 
     public GameMenu(Difficulty difficulty) {
-        game = new Game(difficulty, numPositions);
+        game = new Game(difficulty, 5);
         time = new Timer();
     }
 
@@ -31,10 +32,26 @@ public class GameMenu extends JPanel implements ActionListener {
     public void displayImage(){
 
     }
+    
     //TODO display timer
     public void displayTimer(){
 
     }
+
+    /**
+     * Initializes a JButton to given specs
+     * 
+     * @param button 
+     */
+    private void initButton(JButton button, Color buttonColor, int width, int height, int fontSize) {
+        button.setPreferredSize(new Dimension(width, height));
+        button.setBackground(buttonColor);
+        button.setForeground(Color.WHITE);
+        button.setBorder(new LineBorder(Color.WHITE));
+        button.setFont(new Font("SansSerif", Font.BOLD, fontSize));
+        button.addActionListener(this);
+    }
+    
     //TODO quit game
     @Override
     public void actionPerformed(ActionEvent e) {
