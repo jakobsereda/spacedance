@@ -27,8 +27,9 @@ public class GameMenu extends JPanel implements ActionListener {
     public GameMenu(Difficulty difficulty, MainFrame parent) throws Exception {
         this.parent = parent;
         setLayout(new BorderLayout(0, 70));
-        backgroundImage = new ImageIcon("app/src/main/resources/images/bgimages/marsbackground.jpg");
+        backgroundImage = new ImageIcon("app/src/main/resources/images/bgimages/marsbackground.png");
         game = new Game(difficulty, 5);
+        
         switch (difficulty) {
             case Difficulty.Easy:
                 initCountdown = 30;
@@ -45,17 +46,14 @@ public class GameMenu extends JPanel implements ActionListener {
 
         JPanel positionPanel = initPositionPanel();
         add(positionPanel, BorderLayout.CENTER);
-        
-        initButtons();
-        
-        currentPosition = game.eatPosition();
-        displayImage(currentPosition);
-
-        countdown = initCountdown;
-        setupTimers();
 
         setSize(960, 960);
         repaint();
+        
+        initButtons();
+
+        countdown = initCountdown;
+        setupTimers();
     }
 
     // Initialize buttons (e.g., quit button)
@@ -90,11 +88,12 @@ public class GameMenu extends JPanel implements ActionListener {
 
     private void setupTimers() {
         imageSwitchTimer = new Timer(initCountdown * 1000, e -> switchImage());
-
         countdownTimer = new Timer(1000, e -> updateCountdown());
 
         imageSwitchTimer.start();
         countdownTimer.start();
+
+        switchImage();
     }
 
     public void displayTimer() {
@@ -145,7 +144,7 @@ public class GameMenu extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitButton) {
-            parent.quitGame();  // Quit game when quit button is clicked
+            parent.quitGame();
         }
     }
 }
