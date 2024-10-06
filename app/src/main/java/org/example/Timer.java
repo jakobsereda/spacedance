@@ -4,7 +4,7 @@ public class Timer {
     long time;
 
     public Timer(){
-        this.time = 0;
+        this.time = getTime();
     }
 
     private long getTime(){
@@ -19,4 +19,7 @@ public class Timer {
         this.time = getTime() - this.time;
     }
 
+    public long elapsedTime(){
+        return getTime() - this.time;
+    }
 }
