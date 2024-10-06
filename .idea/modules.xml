@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/rightfootcreep.iml" filepath="$PROJECT_DIR$/.idea/rightfootcreep.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/rightfootcreep.iml" filepath="$PROJECT_DIR$/.idea/modules/rightfootcreep.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/rightfootcreep.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/rightfootcreep.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/rightfootcreep.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/rightfootcreep.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/rightfootcreep.app.test.iml" filepath="$PROJECT_DIR$/.idea/modules/app/rightfootcreep.app.test.iml" />
     </modules>
   </component>
 </project>
