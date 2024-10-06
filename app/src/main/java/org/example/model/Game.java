@@ -23,8 +23,8 @@ public class Game {
         return positions.remove();
     }
 
-    private int increaseScore(int scorePlus){
-        return this.score += scorePlus;
+    private int increaseScore(){
+        return this.score += 1;
     }
 
     public void gameEnd(){
