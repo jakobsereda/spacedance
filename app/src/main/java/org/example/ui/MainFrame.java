@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 public class MainFrame extends JFrame {
     public MainFrame() {
-        setTitle("My Main Frame");
+        setTitle("sample");
         setSize(400, 300); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setVisible(true);
