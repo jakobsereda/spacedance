@@ -148,6 +148,7 @@ public class GameMenu extends JPanel implements ActionListener {
     private void switchImage() {
         currentPosition = game.eatPosition();
         if (currentPosition != null) {
+            game.increaseScore();
             displayImage(currentPosition);
         } else {
             imageSwitchTimer.stop();

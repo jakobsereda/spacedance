@@ -1,5 +1,5 @@
 package org.example;
-
+   
 import org.example.ui.MainFrame;
 
 public class App {

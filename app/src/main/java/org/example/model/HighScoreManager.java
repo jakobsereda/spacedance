@@ -71,14 +71,6 @@ public class HighScoreManager {
             this.score = score;
         }
 
-        public String getPlayerName() {
-            return playerName;
-        }
-
-        public int getScore() {
-            return score;
-        }
-
         @Override
         public int compareTo(ScoreEntry other) {
             return Integer.compare(other.score, this.score);

@@ -1,5 +1,4 @@
 package org.example.model;
-import javax.swing.*;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -24,7 +23,7 @@ public class Game {
         return null;
     }
 
-    private int increaseScore(){
+    public int increaseScore(){
         return this.score += 1;
     }
 
